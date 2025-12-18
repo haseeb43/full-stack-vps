@@ -7,7 +7,7 @@ services:
     build: ./server
     container_name: express-server
     ports:
-      - "5005:5005"
+      - "5006:5006"
     networks:
       - fullstack-network
     restart: unless-stopped
