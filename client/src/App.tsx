@@ -5,7 +5,10 @@ function App() {
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
-    fetch('http://localhost:5006/api/message')
+    // local
+    // fetch('http://localhost:5006/api/message')
+    // deployed
+    fetch('http://69.62.64.113:5006/api/message')
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);
