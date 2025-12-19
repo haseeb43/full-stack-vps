@@ -5,10 +5,8 @@ function App() {
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
-    // local
-    // fetch('http://localhost:5006/api/message')
-    // deployed
-    fetch('http://69.62.64.113:5006/api/message')
+    const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5006';
+    fetch(`${API_URL}/api/message`)
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);

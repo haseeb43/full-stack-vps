@@ -1,27 +1,32 @@
-version: "3.9"
-
-
+version: '3.9'
 
 services:
   server:
     build: ./server
     container_name: express-server
     ports:
-      - "5006:5006"
+      - '5006:5006'
+    environment:
+      - PORT=5006
+      - CORS_ORIGINS=http://localhost:5173,http://server:3005
     networks:
       - fullstack-network
     restart: unless-stopped
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        VITE_API_URL: http://server:5006
     container_name: react-client
     ports:
-      - "3005:3005"
+      - '3005:3005'
+    environment:
+      - VITE_API_URL=http://server:5006
     networks:
       - fullstack-network
     depends_on:
       - server
     restart: unless-stopped
-
 
 networks:
   fullstack-network:
