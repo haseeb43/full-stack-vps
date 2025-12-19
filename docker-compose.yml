@@ -8,7 +8,7 @@ services:
       - '5006:5006'
     environment:
       - PORT=5006
-      - CORS_ORIGINS=http://localhost:5173,http://server:3005
+      - CORS_ORIGINS=http://localhost:5173,http://server:3005,http://69.62.64.113:3005
     networks:
       - fullstack-network
     restart: unless-stopped
