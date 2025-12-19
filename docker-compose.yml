@@ -16,16 +16,24 @@ services:
     build:
       context: ./client
       args:
-        VITE_API_URL: http://server:5006
+        VITE_API_URL: /api
     container_name: react-client
-    ports:
-      - '3005:3005'
-    environment:
-      - VITE_API_URL=http://server:5006
     networks:
       - fullstack-network
     depends_on:
       - server
+    restart: unless-stopped
+  nginx:
+    build:
+      context: ./client
+      dockerfile: ../nginx.Dockerfile
+    container_name: nginx-proxy
+    ports:
+      - '3005:80'
+    networks:
+      - fullstack-network
+    depends_on:
+      - client
     restart: unless-stopped
 
 networks:
